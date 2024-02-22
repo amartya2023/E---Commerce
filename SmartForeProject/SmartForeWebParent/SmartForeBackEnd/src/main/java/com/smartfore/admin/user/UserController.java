@@ -3,7 +3,7 @@ package com.smartfore.admin.user;
 
 import java.util.List;
 
-import javax.management.relation.Role;
+// import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,5 +71,20 @@ public class UserController {
 			return "redirect:/users";
 		}
 		
+	}
+	
+	@GetMapping("/users/delete/{id}")
+	public String deleteUser(@PathVariable(name = "id") Integer id, 
+			Model model,
+			RedirectAttributes redirectAttributes ) {
+		try {
+			service.delete(id);
+			redirectAttributes.addFlashAttribute("message", 
+					"The user ID " + id + "has been deleted successfully");
+		} catch (UserNotFoundException ex) {
+			redirectAttributes.addFlashAttribute("message", ex.getMessage());
+		}
+		
+		return "redirect:/users";
 	}
 }
