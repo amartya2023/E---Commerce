@@ -87,4 +87,15 @@ public class UserController {
 		
 		return "redirect:/users";
 	}
+	
+	@GetMapping("/users/{id}/enable/{status}")
+	public String updateUserEnableStatus(@PathVariable("id") Integer id,
+			@PathVariable("status") boolean enable, RedirectAttributes redirectAttributes) {
+		service.updateUserEnableStatus(id, enable);
+		String status = enable ? "enabled successfully" : "disabled successfully";
+		String message = "The user ID " + id + " has been " + status;
+		redirectAttributes.addFlashAttribute("message", message);
+		
+		return "redirect:/users";
+	}
 }
