@@ -4,7 +4,6 @@ package com.smartfore.admin.user;
 import java.io.IOException;
 import java.util.List;
 
-// import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -163,5 +162,14 @@ public class UserController {
 		List<User> listUsers = service.listAll();
 		UserCsvExporter exporter = new UserCsvExporter();
 		exporter.export(listUsers, response);
+	}
+	
+	@GetMapping("/users/export/excel")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		List<User> listUsers = service.listAll();
+		
+		UserExcelExporter exporter = new UserExcelExporter();
+		exporter.export(listUsers, response);
+	
 	}
 }

@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.data.domain.Page; // <-- This import conflicts with the other one
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
@@ -71,9 +71,9 @@ public class UserRepositoryTest {
 	}
 	
 	@Test
-	public void testUpdateUserDetails() {    // To Update User All Details
+	public void testUpdateUserDetails() {    
 		User userAmartya = repo.findById(1).get();
-		//userAmartya.setEnable(true);
+		
 		userAmartya.setEmail("gamartya02@gmail.com");
 		
 		repo.save(userAmartya);

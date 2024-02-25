@@ -9,9 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.smartfore.common.entity.User;
 
 import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-//import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 	@Query("SELECT u FROM User u WHERE u.email = :email")
