@@ -19,6 +19,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	public Long countById(Integer id);
 	
+	@Query("SELECT u FROM User u WHERE CONCAT(u.id, ' ', u.email, ' ', u.firstName, ' ',"
+			+ " u.lastName) LIKE %?1%")
+	public Page<User> findAll(String keyword, Pageable pageable);
+	
 	@Query("UPDATE User u SET u.enable = ?2 WHERE u.id = ?1")
 	@Modifying
 	public void updateEnableStatus(Integer is, boolean enable);
