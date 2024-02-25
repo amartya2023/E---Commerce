@@ -22,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.smartfore.admin.FileUploadUtil;
 import com.smartfore.common.entity.User;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class UserController {
 	
@@ -154,5 +156,12 @@ public class UserController {
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return "redirect:/users";
+	}
+	
+	@GetMapping("/users/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<User> listUsers = service.listAll();
+		UserCsvExporter exporter = new UserCsvExporter();
+		exporter.export(listUsers, response);
 	}
 }
